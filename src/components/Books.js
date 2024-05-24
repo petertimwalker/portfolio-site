@@ -22,7 +22,7 @@ class Books extends React.Component {
 
   componentDidMount() {
     // Fetch API key from your server
-    fetch('http://ec2-52-91-92-55.compute-1.amazonaws.com:3000/api/key')
+    fetch('https://api.peterwalker.xyz/api/key')
       .then(response => response.json())
       .then(data => {
         this.setState({ apiKey: data.apiKey }); // Set the API key in the component state
