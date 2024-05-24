@@ -138,9 +138,9 @@ class Books extends React.Component {
       return axios
         .get(
           "https://www.googleapis.com/books/v1/volumes/" +
-            book.id +
-            "?key=" +
-            this.state.apiKey
+          book.id +
+          "?key=" +
+          this.state.apiKey
         )
         .then((data) => {
           if (data.data.volumeInfo?.dimensions?.height) {
@@ -233,7 +233,7 @@ class Books extends React.Component {
     this.forceUpdate();
   };
 
-  handleClickSearch = () => {};
+  handleClickSearch = () => { };
 
   render() {
     if (this.state.hasError) {
