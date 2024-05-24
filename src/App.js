@@ -8,7 +8,6 @@ import "./App.css";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import BookSearch from "./pages/BookSearch";
 import BookApp from "./pages/BookApp";
 import ContactPage from "./pages/ContactPage";
 import Carousel from "./components/Carousel";
@@ -22,8 +21,7 @@ class App extends React.Component {
       headerLinks: [
         { title: "Home", path: "/" },
         { title: "About", path: "/about" },
-        { title: "Contact", path: "/contact" },
-        { title: "Book Search", path: "/booksearch" },
+        //{ title: "Contact", path: "/contact" },
       ],
       home: {
         title: "Hello",
@@ -36,11 +34,11 @@ class App extends React.Component {
       contact: {
         title: "Get In Touch",
       },
-      booksearch: {
-        title: "Book Search",
-      },
       bookapp: {
         title: "Book App",
+        subTitle: "",
+        text:
+          "returns last three published books from given author that fit within the given height",
       },
     };
   }
@@ -58,9 +56,6 @@ class App extends React.Component {
                 </Link>
                 <Link className="nav-link" to="/about">
                   About
-                </Link>
-                <Link className="nav-link" to="/contact">
-                  Contact
                 </Link>
               </Nav>
             </Navbar.Collapse>
@@ -87,7 +82,13 @@ class App extends React.Component {
 
           <Route
             path="/bookapp"
-            render={() => <BookApp title={this.state.bookapp.title} />}
+            render={() => (
+              <BookApp
+                title={this.state.bookapp.title}
+                subTitle={this.state.bookapp.subTitle}
+                text={this.state.bookapp.text}
+              />
+            )}
           />
           <Footer></Footer>
         </Container>
@@ -95,14 +96,5 @@ class App extends React.Component {
     );
   }
 }
-/*
-<Link className="nav-link" to="/booksearch">
-                  Book Search
-                </Link>
-                
-<Route
-            path="/booksearch"
-            render={() => <BookSearch title={this.state.booksearch.title} />}
-          />*/
 
 export default App;

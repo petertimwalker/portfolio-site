@@ -7,6 +7,7 @@ import github from "../assets/images/github.svg";
 import linkedin from "../assets/images/linkedin.png";
 import handshake from "../assets/images/handshake.png";
 
+//Carousel Social Media
 class CarouselSM extends React.Component {
   constructor(props) {
     super(props);

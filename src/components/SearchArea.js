@@ -1,31 +1,34 @@
 import React from "react";
+import Form from "react-bootstrap/form";
+import Button from "react-bootstrap/Button";
 
 const SearchArea = (props) => {
   return (
-    <div className="search-area">
-      <form onSubmit={props.searchBook} action="">
-        <input
-          placeholder="enter author"
+    <Form onSubmit={props.searchBook} action="" style={{ width: 400 }}>
+      <Form.Group>
+        <Form.Label>name of author</Form.Label>
+        <Form.Control
+          placeholder="First Last"
           onChange={props.handleSearch}
           type="text"
         />
-        <input
-          placeholder="enter height"
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>enter height of bookshelf</Form.Label>
+        <Form.Control
           onChange={props.handleHeight}
           type="text"
+          placeholder="inches"
         />
-        <button type="submit">Search</button>
-      </form>
-      <select defaultValue="Newest" onChange={props.handleSort}>
-        <option disabled value="Sort">
-          Sort
-        </option>
-        <option value="Newest">Newest</option>
-        <option disabled value="Oldest">
-          Oldest
-        </option>
-      </select>
-    </div>
+        <Form.Text className="text-muted">
+          leave empty for no height constraint
+        </Form.Text>
+      </Form.Group>
+      <Button onClick={props.handleClickSearch} variant="primary" type="submit">
+        Search
+      </Button>
+    </Form>
   );
 };
 /*

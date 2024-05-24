@@ -15,10 +15,11 @@ class Carousel extends React.Component {
         {
           id: 0,
           title: "BookApp",
-          subTitle: "follow link, enter name of author",
+          subTitle:
+            "Returns an authors last three published books that fit your bookshelf",
           imgSrc: library,
           link: "/bookapp",
-          selected: false,
+          selected: true,
         },
       ],
     };
