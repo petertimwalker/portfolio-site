@@ -11,7 +11,7 @@ class Books extends React.Component {
     this.state = {
       books: [],
       searchField: "",
-      apiKey: "AIzaSyDt5mXFwvWgydKIRaJuWccj2yKB8VtXCms",
+      apiKey: "",
       authors: [],
       height: 99,
       hasSpinner: false,
@@ -25,7 +25,6 @@ class Books extends React.Component {
     fetch('http://ec2-52-91-92-55.compute-1.amazonaws.com:3000/api/key')
       .then(response => response.json())
       .then(data => {
-        console.log('API Key:', data.apiKey);
         this.setState({ apiKey: data.apiKey }); // Set the API key in the component state
       })
       .catch(error => {
@@ -36,7 +35,6 @@ class Books extends React.Component {
   searchBook = (event) => {
     event.preventDefault();
     let req = `https://www.googleapis.com/books/v1/volumes?q=inauthor:${this.state.searchField}&key= ${this.state.apiKey} &orderBy=newest&maxResults=40`;
-    console.log(req);
     this.setState({ books: [], hasSpinner: true, hasNoResults: false });
     axios
       .get(req)
