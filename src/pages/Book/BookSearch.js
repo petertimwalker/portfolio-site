@@ -1,8 +1,8 @@
 import React from "react";
-import SearchArea from "./SearchArea";
+import SearchArea from "../../components/SearchArea";
 import BookList from "./BookList";
 import axios from "axios";
-import noImg from "../assets/images/logo512.png";
+import noImg from "../../assets/images/logo512.png";
 
 class BookSearch extends React.Component {
         constructor(props) {
