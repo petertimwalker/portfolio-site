@@ -1,5 +1,5 @@
 import React from "react";
-import SearchArea from "../../components/SearchArea";
+import BookSearchForm from "./BookSearchForm";
 import BookList from "./BookList";
 import axios from "axios";
 import noImg from "../../assets/images/logo512.png";
@@ -265,12 +265,12 @@ class BookSearch extends React.Component {
                                                 justifyContent: "center",
                                         }}
                                 >
-                                        <SearchArea
+                                        <BookSearchForm
                                                 handleClickSearch={this.handleClickSearch}
                                                 searchBook={this.searchBook}
                                                 handleSearch={this.handleSearch}
                                                 handleHeight={this.handleHeight}
-                                        ></SearchArea>
+                                        ></BookSearchForm>
                                 </div>
 
                                 <div
