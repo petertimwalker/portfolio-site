@@ -3,7 +3,6 @@ import SearchArea from "./SearchArea";
 import BookList from "./BookList";
 import axios from "axios";
 import noImg from "../assets/images/logo512.png";
-import Spinner from "react-bootstrap/Spinner";
 
 class Books extends React.Component {
   constructor(props) {
@@ -57,7 +56,6 @@ class Books extends React.Component {
             .then((data) => {
               const filterHeight = this.filterHeight(data);
 
-              console.log(filterHeight);
               if (filterHeight.length === 0) {
                 this.setState({ hasNoResults: true });
               }
@@ -67,7 +65,6 @@ class Books extends React.Component {
               this.setState({ books: filterHeight });
             })
             .catch((error) => {
-              console.log(error);
               this.setState({ hasError: true, hasSpinner: false });
             });
         } else {
@@ -75,7 +72,6 @@ class Books extends React.Component {
         }
       })
       .catch((error) => {
-        console.log(error);
         this.setState({ hasError: true, hasSpinner: false });
       });
   };
@@ -164,7 +160,6 @@ class Books extends React.Component {
           return book;
         })
         .catch((error) => {
-          console.log(error);
           this.setState({ hasError: true, hasSpinner: false });
         });
     });
