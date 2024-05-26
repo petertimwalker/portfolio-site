@@ -65,6 +65,7 @@ class BookSearch extends React.Component {
                                                         this.setState({ books: filterHeight });
                                                 })
                                                 .catch((error) => {
+                                                        console.error("caught in add hieght promise", error);
                                                         this.setState({ hasError: true, hasSpinner: false });
                                                 });
                                 } else {
@@ -72,6 +73,8 @@ class BookSearch extends React.Component {
                                 }
                         })
                         .catch((error) => {
+                                console.error("caught in axios call", error);
+
                                 this.setState({ hasError: true, hasSpinner: false });
                         });
         };
@@ -160,6 +163,7 @@ class BookSearch extends React.Component {
                                         return book;
                                 })
                                 .catch((error) => {
+                                        console.error("caught in add height axios", error);
                                         this.setState({ hasError: true, hasSpinner: false });
                                 });
                 });
