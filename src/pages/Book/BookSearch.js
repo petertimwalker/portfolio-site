@@ -3,9 +3,11 @@ import BookSearchForm from './BookSearchForm'
 import BookList from './BookList'
 import axios from 'axios'
 import noImg from '../../assets/images/no_img_available.png'
+import BookApiService from './BookApiService'
 
 class BookSearch extends React.Component {
   constructor(props) {
+    super(props)
     this.state = {
       books: [],
       searchField: '',
@@ -20,19 +22,15 @@ class BookSearch extends React.Component {
   }
 
   async componentDidMount() {
-    const apiKey = await this.fetchApiKey() // fetch apiKey
-    this.bookApiService = new BookApiService(apiKey) // instantiate bookApiService with apiKey
+    const apiKey = await this.fetchApiKey()
+    this.bookApiService = new BookApiService(apiKey)
   }
 
   async fetchApiKey() {
-    fetch('https://api.peterwalker.xyz/api/key')
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ apiKey: data.apiKey }) // Set the API key in the component state
-      })
-      .catch((error) => {
-        console.error('Error fetching API key:', error)
-      })
+    const response = await fetch('http://localhost:3001/api/key')
+    const data = await response.json()
+    this.setState({ apiKey: data.apiKey })
+    return data.apiKey
   }
 
   searchBook = (event) => {
