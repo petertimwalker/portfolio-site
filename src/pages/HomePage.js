@@ -1,8 +1,8 @@
-import React from "react";
-import Hero from "../components/Hero";
-import Carousel from "../components/Carousel";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import React from 'react';
+import Hero from '../components/Hero';
+import Carousel from '../components/Carousel';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 function HomePage(props) {
   return (
