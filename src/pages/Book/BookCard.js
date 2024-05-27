@@ -1,5 +1,5 @@
-import React from "react";
-import Card from "react-bootstrap/Card";
+import React from 'react'
+import Card from 'react-bootstrap/Card'
 
 const BookCard = (props) => {
   return (
@@ -17,7 +17,7 @@ const BookCard = (props) => {
         <small className="text-muted">Height: {props.height}</small>
       </Card.Footer>
     </Card>
-  );
-};
+  )
+}
 
-export default BookCard;
+export default BookCard

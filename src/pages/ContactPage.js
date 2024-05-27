@@ -1,38 +1,38 @@
-import React from "react";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import Hero from "../components/Hero";
-import Content from "../components/Content";
+import React from 'react'
+import Form from 'react-bootstrap/Form'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
+import Hero from '../components/Hero'
+import Content from '../components/Content'
 
 class ContactPage extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      name: "",
-      email: "",
-      message: "",
+      name: '',
+      email: '',
+      message: '',
       disabled: false,
       emailSent: null,
-    };
+    }
   }
 
   handleChange = (event) => {
-    console.log(event);
+    console.log(event)
 
-    const target = event.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    const name = target.name;
+    const target = event.target
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.name
 
-    this.setState({ [name]: value });
-  };
+    this.setState({ [name]: value })
+  }
 
   handleSubmit = (event) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    this.setState({ disabled: true });
-  };
+    this.setState({ disabled: true })
+  }
 
   render() {
     return (
@@ -98,8 +98,8 @@ class ContactPage extends React.Component {
           </Form>
         </Content>
       </div>
-    );
+    )
   }
 }
 
-export default ContactPage;
+export default ContactPage
