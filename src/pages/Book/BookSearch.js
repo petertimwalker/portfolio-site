@@ -6,7 +6,6 @@ import noImg from '../../assets/images/no_img_available.png'
 
 class BookSearch extends React.Component {
   constructor(props) {
-    super(props)
     this.state = {
       books: [],
       searchField: '',
@@ -17,10 +16,15 @@ class BookSearch extends React.Component {
       hasNoResults: false,
       hasError: false,
     }
+    this.bookApiService = null
   }
 
-  componentDidMount() {
-    // Fetch API key from your server
+  async componentDidMount() {
+    const apiKey = await this.fetchApiKey() // fetch apiKey
+    this.bookApiService = new BookApiService(apiKey) // instantiate bookApiService with apiKey
+  }
+
+  async fetchApiKey() {
     fetch('https://api.peterwalker.xyz/api/key')
       .then((response) => response.json())
       .then((data) => {
@@ -33,7 +37,7 @@ class BookSearch extends React.Component {
 
   searchBook = (event) => {
     event.preventDefault()
-    let req = `https://www.googleapis.com/books/v1/volumes?q=inauthor:${this.state.searchField}&key= ${this.state.apiKey} &orderBy=newest&maxResults=40`
+    let req = this.bookApiService.fetchBooksByAuthor(this.state.searchField)
     this.setState({ books: [], hasSpinner: true, hasNoResults: false })
     axios
       .get(req)
