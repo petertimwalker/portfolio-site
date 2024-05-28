@@ -10,7 +10,6 @@ class BookSearch extends React.Component {
     this.state = {
       books: [],
       searchField: '',
-      apiKey: '',
       authors: [],
       height: 99,
       hasSpinner: false,
@@ -19,28 +18,16 @@ class BookSearch extends React.Component {
     };
   }
 
-  componentDidMount() {
-    // Fetch API key from your server
-    fetch('https://api.peterwalker.xyz/api/key')
-      .then((response) => response.json())
-      .then((data) => {
-        this.setState({ apiKey: data.apiKey }); // Set the API key in the component state
-      })
-      .catch((error) => {
-        console.error('Error fetching API key:', error);
-      });
-  }
-
   searchBook = (event) => {
     event.preventDefault();
-    let req = `https://www.googleapis.com/books/v1/volumes?q=inauthor:${this.state.searchField}&key= ${this.state.apiKey} &orderBy=newest&maxResults=40`;
+    let req = `https://api.peterwalker.xyz/api/books?author=${this.state.searchField}`;
     this.setState({ books: [], hasSpinner: true, hasNoResults: false });
     axios
       .get(req)
       .then((data) => {
         if (data.data.totalItems !== 0) {
           //fill in missing attributes
-          const cleanData = this.cleanData(data.data.items);
+          const cleanData = this.cleanData(data.data);
           //filter books for specific author
           //const filterAuthor = this.filterAuthor(cleanData);
           //only english
@@ -146,12 +133,7 @@ class BookSearch extends React.Component {
   addHeight = (data) => {
     const addHeight = data.map(async (book) => {
       return axios
-        .get(
-          'https://www.googleapis.com/books/v1/volumes/' +
-            book.id +
-            '?key=' +
-            this.state.apiKey,
-        )
+        .get('https://api.peterwalker.xyz/api/books/book?bookId=' + book.id)
         .then((data) => {
           if (data.data.volumeInfo?.dimensions?.height) {
             book['height'] = (
