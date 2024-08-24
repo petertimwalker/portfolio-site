@@ -161,8 +161,12 @@ class BookSearch extends React.Component {
     const cleanedData = data.map((book) => {
       if (book.volumeInfo.hasOwnProperty('publishedDate') === false) {
         book.volumeInfo['publishedDate'] = '0000';
-      } else if (book.volumeInfo.hasOwnProperty('imageLinks') === false) {
+      }
+      if (book.volumeInfo.hasOwnProperty('imageLinks') === false) {
         book.volumeInfo['imageLinks'] = { thumbnail: noImg };
+      }
+      if (book.volumeInfo.hasOwnProperty('authors') === false) {
+        book.volumeInfo['authors'] = ['Unavailable'];
       }
       return book;
     });
