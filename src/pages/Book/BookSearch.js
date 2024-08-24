@@ -31,17 +31,16 @@ class BookSearch extends React.Component {
       .get(req)
       .then((data) => {
         if (data.data.totalItems !== 0) {
-          //fill in missing attributes
+          // fill in missing attributes
           const cleanData = this.cleanData(data.data);
-          //filter books for specific author
-          //const filterAuthor = this.filterAuthor(cleanData);
-          //only english
+          // filter books for specific author
+          // commented out because sometimes the author is spelled differently
+          // const filterAuthor = this.filterAuthor(cleanData);
+          // my dad only reads english books
           const filterLanguage = this.filterLanguage(cleanData);
-          //filter books thst havent been published yet
+          // filter books thst havent been published yet
           const filterPublishedDate = this.filterPublishedDate(filterLanguage);
-          //remove duplicates
           const removeDuplicates = this.removeDuplicates(filterPublishedDate);
-          // formatAuthors
           const formatAuthors = this.formatAuthors(removeDuplicates);
 
           Promise.all(this.addHeight(formatAuthors))
@@ -57,7 +56,7 @@ class BookSearch extends React.Component {
               this.setState({ books: filterHeight });
             })
             .catch((error) => {
-              console.error('caught in add hieght promise', error);
+              console.error('caught in add height promise', error);
               this.setState({ hasError: true, hasSpinner: false });
             });
         } else {
@@ -76,11 +75,11 @@ class BookSearch extends React.Component {
       var available = false;
       var today = new Date();
       var dd = String(today.getDate()).padStart(2, '0');
-      var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+      var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
       var yyyy = today.getFullYear();
       today = yyyy + '-' + mm + '-' + dd;
 
-      //this compares todays date to the books date
+      // this compares todays date to the books date
       if (
         book.volumeInfo.publishedDate.substring(0, 4) === today.substring(0, 4)
       ) {
@@ -113,12 +112,11 @@ class BookSearch extends React.Component {
     let removeDuplicates = [];
     let bookTitles = [];
 
-    //for each book
     for (var bookIndexFirst in data) {
       let book = data[bookIndexFirst];
-      //if bookTitles includes this title then we know the shortest book is already pushed to removeDuplicates
+      // if bookTitles includes this title then we know the shortest book is already pushed to removeDuplicates
       if (!bookTitles.includes(book.volumeInfo.title)) {
-        //push shortest book of same title
+        // push shortest book of same title
         for (var bookIndexSecond in data) {
           if (
             book.volumeInfo.title === data[bookIndexSecond].volumeInfo.title &&
@@ -138,12 +136,12 @@ class BookSearch extends React.Component {
   addHeight = (data) => {
     const addHeight = data.map(async (book) => {
       return axios
-        .get('https://api.peterwalker.xyz/api/books/book?bookId=' + book.id)
+        .get(`${baseUrl}/api/books/book?bookId=${book.id}`)
         .then((data) => {
           if (data.data.volumeInfo?.dimensions?.height) {
             book['height'] = (
               data.data.volumeInfo.dimensions.height.split(' ')[0] / 2.54
-            ).toFixed(2); //convert cm to in
+            ).toFixed(2); // convert cm to in
           } else {
             book['height'] = '999';
           }
@@ -201,7 +199,7 @@ class BookSearch extends React.Component {
     return filterLanguage;
   };
 
-  //takes an array of books and filters out books with height greater than state.height
+  // takes an array of books and filters out books with height greater than state.height
   filterHeight = (data) => {
     const filterHeight = data.filter((book) => {
       return parseInt(book.height, 10) < this.state.height;
