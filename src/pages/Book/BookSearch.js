@@ -4,6 +4,11 @@ import BookList from './BookList';
 import axios from 'axios';
 import noImg from '../../assets/images/no_img_available.png';
 
+const baseUrl =
+  process.env.NODE_ENV === 'development'
+    ? 'http:// localhost:3001'
+    : 'https:// api.peterwalker.xyz';
+
 class BookSearch extends React.Component {
   constructor(props) {
     super(props);
@@ -20,7 +25,7 @@ class BookSearch extends React.Component {
 
   searchBook = (event) => {
     event.preventDefault();
-    let req = `https://api.peterwalker.xyz/api/books?author=${this.state.searchField}`;
+    let req = `${baseUrl}/api/books?author=${this.state.searchField}`;
     this.setState({ books: [], hasSpinner: true, hasNoResults: false });
     axios
       .get(req)
