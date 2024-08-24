@@ -6,8 +6,8 @@ import noImg from '../../assets/images/no_img_available.png';
 
 const baseUrl =
   process.env.NODE_ENV === 'development'
-    ? 'http:// localhost:3001'
-    : 'https:// api.peterwalker.xyz';
+    ? 'http://localhost:3001'
+    : 'https://api.peterwalker.xyz';
 
 class BookSearch extends React.Component {
   constructor(props) {
