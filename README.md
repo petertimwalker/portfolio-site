@@ -2,6 +2,15 @@
 
 I intially created this app the Summer going into my senior year of college 2021. I created the app using create-react-app and hosted it via AWS S3 bucket.
 
+# Local dev
+1. Setup api-service [here](https://github.com/petertimwalker/api-service?tab=readme-ov-file#local-dev)
+2. npm install
+3. NODE_ENV=development npm start
+4. React app running on port 3000 http://localhost:3000/bookapp
+
+## Run tests
+npm test 
+
 ## /BookApp
 
 ### The probelm I was solving at the time
